@@ -139,7 +139,6 @@ namespace Minesweeper
 
         private void handleTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            label.Content=timer;
         }
     }
 }
