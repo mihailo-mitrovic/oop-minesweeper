@@ -44,7 +44,7 @@ namespace Minesweeper
             int brojac = bombcount;
             while(brojac != 0)
             {
-                var rand = new Random();
+                var rand = new Random(42);
                 var a = rand.Next(dimensions);
                 var b = rand.Next(dimensions);
                 if (!bombe[a,b])

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rubssozxB8iZ08n60RdTNg5C6VDaigk8WchV8vP8lX4PMqBxKIx7aVFDNpRSf2fun+NZ3B2sw8shLrXmLVF5vA==",
+  "dgSpecHash": "BRLoRpVZlbe/hKcL5HfxYlPIoiIMgXBbHDQxXWmik1B1PXRbDerOimzMR3CEVhEUzfnQniAsdUl9KbVFLsOC+g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\miki2\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
+  "projectFilePath": "C:\\Users\\miki2\\Documents\\GitHub\\oop-minesweeper\\Minesweeper\\Minesweeper\\Minesweeper.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
