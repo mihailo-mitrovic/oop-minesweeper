@@ -45,6 +45,7 @@ namespace Minesweeper
                     grid.ColumnDefinitions.Add(new ColumnDefinition());
                 }
                 InitializeGrid();
+                RefreshGUI();
                 void HandleLeft(object sender, RoutedEventArgs e)
                 {
                     GameButton b = (GameButton)sender;

@@ -205,6 +205,7 @@ namespace Minesweeper
             MineGeneration();
             zeros = new bool[d, d];
             Zeros();
+            FirstMove();
         }
         public GameStatus GetStatus()
         {
@@ -230,6 +231,22 @@ namespace Minesweeper
             {
                 return false;
             }
+        }
+        public void FirstMove()
+        {
+            int brojac = 1;
+            while (brojac != 0)
+            {
+                var rand = new Random();
+                var a = rand.Next(dimensions);
+                var b = rand.Next(dimensions);
+                if (panel[a,b].NeigborMines == 0)
+                {
+                    Reveal(panel[a, b]);
+                    brojac--;
+                }
+            }
+
         }
         public bool PanelMined(GameButton b)
         {
