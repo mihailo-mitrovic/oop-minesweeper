@@ -44,7 +44,7 @@ namespace Minesweeper
             int brojac = bombcount;
             while(brojac != 0)
             {
-                var rand = new Random(43);
+                var rand = new Random();
                 var a = rand.Next(dimensions);
                 var b = rand.Next(dimensions);
                 if (!bombe[a,b])
@@ -218,7 +218,7 @@ namespace Minesweeper
         {
             Panel p = panel[b.X, b.Y];
             int pi = NeighbourFields(p).Where(x => x.IsFlagged).Count();
-            if (p.NeigborMines == pi)
+            if (p.NeigborMines == pi && p.IsRevealed)
             {
                 foreach (var P in NeighbourFields(p))
                 {

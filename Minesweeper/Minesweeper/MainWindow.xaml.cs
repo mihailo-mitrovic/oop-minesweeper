@@ -21,14 +21,14 @@ namespace Minesweeper
     /// </summary>
     public partial class MainWindow : Window
     {
-        Timer timer = new Timer();
+        //Timer timer = new Timer();
 
         public MainWindow()
         {
-            timer = new Timer(4000);
-            timer.AutoReset = true;
-            timer.Enabled = true;
-            timer.Elapsed += new ElapsedEventHandler(handleTimerElapsed);
+            //timer = new Timer(4000);
+            //timer.AutoReset = true;
+            //timer.Enabled = true;
+            //timer.Elapsed += new ElapsedEventHandler(handleTimerElapsed);
             InitializeComponent();
             int dimensions = new int();
             int bombcount = new int();
@@ -51,15 +51,7 @@ namespace Minesweeper
                     bool B = engine.Reveal(b);
                     if (B)
                     {
-                        if (engine.PanelMined(b))
-                        {
-                            b.Content = "*";
-                        }
-                        else
-                        {
-                            b.Content = engine.GetPanels()[b.X,b.Y].NeigborMines;
-                        }
-                        b.Background = Brushes.White;
+                        RefreshGUI();
                         if (engine.GetStatus() == GameStatus.Completed)
                         {
                             MessageBoxResult result = MessageBox.Show("Pobeda, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
@@ -90,7 +82,6 @@ namespace Minesweeper
                         }
                     }
                 }
-
                 void HandleClick(object sender, MouseEventArgs e)
                 {
                     GameButton b = (GameButton)sender;
@@ -98,6 +89,7 @@ namespace Minesweeper
                     if (e.RightButton == MouseButtonState.Pressed)
                     {
                         engine.Flag(b);
+                        RefreshGUI();
                     }
                     if (e.MiddleButton == MouseButtonState.Pressed)
                     {
@@ -105,12 +97,30 @@ namespace Minesweeper
                         Panel p = engine.GetPanels()[b.X, b.Y];
                         if (middle)
                         {
-                            foreach (var item in engine.NeighbourFields(p))
+                            RefreshGUI();
+                        }
+                    }
+                }
+                void RefreshGUI()
+                {
+                    foreach (var item in engine.GetPanels())
+                    {
+                        GameButton button = (GameButton)list.Where(x => x.X == item.X && x.Y == item.Y).Cast<GameButton>().Single();
+                        if (item.IsRevealed)
+                        {
+                            button.Background = Brushes.White;
+                            if (item.IsMine)
                             {
-                                GameButton gb = list.Find(x => x.X == item.X && x.Y == item.Y);
-                                gb.Background = Brushes.White;
-                                gb.Content = item.NeigborMines;
+                                button.Content = "*";
                             }
+                            else
+                            {
+                                button.Content = item.NeigborMines;
+                            }
+                        }
+                        else if (item.IsFlagged)
+                        {
+                            button.Content = "F";
                         }
                     }
                 }
@@ -137,8 +147,9 @@ namespace Minesweeper
             }
         }
 
-        private void handleTimerElapsed(object sender, ElapsedEventArgs e)
-        {
-        }
+        //private void handleTimerElapsed(object sender, ElapsedEventArgs e)
+        //{
+            
+        //}
     }
 }
