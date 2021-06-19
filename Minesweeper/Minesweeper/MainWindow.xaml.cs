@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Timers;
+using Timer = System.Timers.Timer;
 
 namespace Minesweeper
 {
@@ -21,11 +22,11 @@ namespace Minesweeper
     /// </summary>
     public partial class MainWindow : Window
     {
-        //Timer timer = new Timer();
-
+        //public static Timer timer;
+        //int counter = 0;
         public MainWindow()
         {
-            //timer = new Timer(4000);
+            //timer = new Timer(1000);
             //timer.AutoReset = true;
             //timer.Enabled = true;
             //timer.Elapsed += new ElapsedEventHandler(handleTimerElapsed);
@@ -86,6 +87,7 @@ namespace Minesweeper
                         }
                         else if (item.IsFlagged)
                         {
+                            button.Background = Brushes.Blue;
                             button.Content = "F";
                         }
                     }
@@ -159,7 +161,11 @@ namespace Minesweeper
 
         //private void handleTimerElapsed(object sender, ElapsedEventArgs e)
         //{
-            
+        //    this.Dispatcher.Invoke(() =>
+        //    {
+        //        label.Content = counter;
+        //    });
+        //    counter++;
         //}
     }
 }
