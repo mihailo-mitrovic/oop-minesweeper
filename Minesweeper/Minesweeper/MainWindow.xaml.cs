@@ -79,7 +79,7 @@ namespace Minesweeper
                 {
                     foreach (var item in engine.GetPanels())
                     {
-                        GameButton button = (GameButton)list.Where(x => x.X == item.X && x.Y == item.Y).Cast<GameButton>().Single();
+                        GameButton button = list.Where(x => x.X == item.X && x.Y == item.Y).Cast<GameButton>().Single();
                         if (item.IsRevealed)
                         {
                             button.Background = Brushes.White;
@@ -111,7 +111,7 @@ namespace Minesweeper
                     RefreshGUI();
                     if (engine.GetStatus() == GameStatus.Completed)
                     {
-                        MessageBoxResult result = MessageBox.Show("Pobeda, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
+                        MessageBoxResult result = MessageBox.Show("Pobeda. Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
@@ -126,7 +126,7 @@ namespace Minesweeper
                     if (engine.GetStatus() == GameStatus.Failed)
                     {
                         ShowAllMines();
-                        MessageBoxResult result = MessageBox.Show("Poraz, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
+                        MessageBoxResult result = MessageBox.Show("Poraz. Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
