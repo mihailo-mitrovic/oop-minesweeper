@@ -81,6 +81,7 @@ namespace Minesweeper
                                     break;
                             }
                         }
+                        RefreshGUI();
                     }
                 }
                 void HandleClick(object sender, MouseEventArgs e)
@@ -127,7 +128,7 @@ namespace Minesweeper
                 }
                 void InitializeGrid()
                 {
-                    
+                    list.Clear();   
                     for (int i = 0; i < dimensions; i++)
                     {
                         for (int j = 0; j < dimensions; j++)

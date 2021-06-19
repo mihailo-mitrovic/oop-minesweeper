@@ -190,7 +190,13 @@ namespace Minesweeper
         }
         public void RevealZeros(Panel p)
         {
-            
+            foreach (var item in NeighbourFields(p))
+            {
+                if (!item.IsRevealed)
+                {
+                    Reveal(item);
+                }
+            }
         }
         public void EndGame()
         {
