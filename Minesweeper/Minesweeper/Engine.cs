@@ -221,6 +221,10 @@ namespace Minesweeper
         {
             return panel;
         }
+        public List<Panel> GetMinedPanels()
+        {
+            return MinedPanels;
+        }
         public bool MiddleClick(GameButton b)
         {
             Panel p = panel[b.X, b.Y];

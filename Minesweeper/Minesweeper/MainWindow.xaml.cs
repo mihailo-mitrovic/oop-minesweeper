@@ -52,36 +52,7 @@ namespace Minesweeper
                     bool B = engine.Reveal(b);
                     if (B)
                     {
-                        RefreshGUI();
-                        if (engine.GetStatus() == GameStatus.Completed)
-                        {
-                            MessageBoxResult result = MessageBox.Show("Pobeda, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
-                            switch (result)
-                            {
-                                case MessageBoxResult.Yes:
-                                    engine = new Engine(dimensions, bombcount);
-                                    InitializeGrid();
-                                    break;
-                                case MessageBoxResult.No:
-                                    engine.EndGame();
-                                    break;
-                            }
-                        }
-                        if (engine.GetStatus() == GameStatus.Failed)
-                        {
-                            MessageBoxResult result = MessageBox.Show("Poraz, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
-                            switch (result)
-                            {
-                                case MessageBoxResult.Yes:
-                                    engine = new Engine(dimensions, bombcount);
-                                    InitializeGrid();
-                                    break;
-                                case MessageBoxResult.No:
-                                    engine.EndGame();
-                                    break;
-                            }
-                        }
-                        RefreshGUI();
+                        GameStatusCheck();
                     }
                 }
                 void HandleClick(object sender, MouseEventArgs e)
@@ -99,7 +70,7 @@ namespace Minesweeper
                         Panel p = engine.GetPanels()[b.X, b.Y];
                         if (middle)
                         {
-                            RefreshGUI();
+                            GameStatusCheck();
                         }
                     }
                 }
@@ -111,20 +82,57 @@ namespace Minesweeper
                         if (item.IsRevealed)
                         {
                             button.Background = Brushes.White;
-                            if (item.IsMine)
-                            {
-                                button.Content = "*";
-                            }
-                            else
-                            {
-                                button.Content = item.NeigborMines;
-                            }
+                            button.Content = item.NeigborMines;
                         }
                         else if (item.IsFlagged)
                         {
                             button.Content = "F";
                         }
                     }
+                }
+                void ShowAllMines()
+                {
+                    List<Panel> P = engine.GetMinedPanels();
+                    foreach (var item in P)
+                    {
+                        GameButton button = (GameButton)list.Where(x => x.X == item.X && x.Y == item.Y).Cast<GameButton>().Single();
+                        button.Background = Brushes.Red;
+                        button.Content = "*";
+                    }
+                }
+                void GameStatusCheck()
+                {
+                    RefreshGUI();
+                    if (engine.GetStatus() == GameStatus.Completed)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Pobeda, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                engine = new Engine(dimensions, bombcount);
+                                InitializeGrid();
+                                break;
+                            case MessageBoxResult.No:
+                                engine.EndGame();
+                                break;
+                        }
+                    }
+                    if (engine.GetStatus() == GameStatus.Failed)
+                    {
+                        ShowAllMines();
+                        MessageBoxResult result = MessageBox.Show("Poraz, Nova igra ?", "Minesweeper", MessageBoxButton.YesNo);
+                        switch (result)
+                        {
+                            case MessageBoxResult.Yes:
+                                engine = new Engine(dimensions, bombcount);
+                                InitializeGrid();
+                                break;
+                            case MessageBoxResult.No:
+                                engine.EndGame();
+                                break;
+                        }
+                    }
+                    RefreshGUI();
                 }
                 void InitializeGrid()
                 {
