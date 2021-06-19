@@ -90,6 +90,10 @@ namespace Minesweeper
                             button.Background = Brushes.Blue;
                             button.Content = "F";
                         }
+                        else if (!item.IsFlagged && !item.IsRevealed)
+                        {
+                            button.Background = Brushes.Gray;
+                        }
                     }
                 }
                 void ShowAllMines()
