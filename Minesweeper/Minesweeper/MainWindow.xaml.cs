@@ -22,14 +22,13 @@ namespace Minesweeper
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public static Timer timer;
-        //int counter = 0;
+        public static Timer timer;
+        int counter;
         public MainWindow()
         {
-            //timer = new Timer(1000);
-            //timer.AutoReset = true;
-            //timer.Enabled = true;
-            //timer.Elapsed += new ElapsedEventHandler(handleTimerElapsed);
+            timer = new Timer(1000);
+            timer.AutoReset = true;
+            timer.Elapsed += new ElapsedEventHandler(handleTimerElapsed);
             InitializeComponent();
             int dimensions = new int();
             int bombcount = new int();
@@ -37,6 +36,10 @@ namespace Minesweeper
             ApplyButton.Click += new RoutedEventHandler(ApplyButton_Click);
             void ApplyButton_Click(object sender, RoutedEventArgs e)
             {
+                counter = 0;
+                grid.RowDefinitions.Clear();
+                grid.ColumnDefinitions.Clear();
+                timer.Enabled = true;
                 dimensions = int.Parse(TextBoxDimensions.Text);
                 bombcount = int.Parse(TextBoxMines.Text);
                 Engine engine = new Engine(dimensions, bombcount);
@@ -115,6 +118,7 @@ namespace Minesweeper
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
+                                counter = 0;
                                 engine = new Engine(dimensions, bombcount);
                                 InitializeGrid();
                                 break;
@@ -130,6 +134,7 @@ namespace Minesweeper
                         switch (result)
                         {
                             case MessageBoxResult.Yes:
+                                counter = 0;
                                 engine = new Engine(dimensions, bombcount);
                                 InitializeGrid();
                                 break;
@@ -163,13 +168,13 @@ namespace Minesweeper
             }
         }
 
-        //private void handleTimerElapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    this.Dispatcher.Invoke(() =>
-        //    {
-        //        label.Content = counter;
-        //    });
-        //    counter++;
-        //}
+        private void handleTimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                time.Content = counter;
+           });
+            counter++;
+        }
     }
 }

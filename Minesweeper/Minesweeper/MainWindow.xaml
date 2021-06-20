@@ -6,11 +6,14 @@
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
-    <Grid x:Name="grid" ShowGridLines="False" Height="400" Width="400 
-          ">
-        <TextBox HorizontalAlignment="Left" Margin="-175,-63,0,0" x:Name="TextBoxDimensions" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Margin="-175,-40,0,0" x:Name = "TextBoxMines" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+    <Grid Name="main" ShowGridLines="False" 
+          >
+        <TextBox HorizontalAlignment="Left" Margin="25,10,0,0" x:Name="TextBoxDimensions" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="25,33,0,0" x:Name = "TextBoxMines" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name = "ApplyButton" Content="Apply" Width="64" Height ="32"  Margin="-175,-17,511,385" />
-        <Label x:Name = "label" Content="Label" HorizontalAlignment="Left" Margin="-162,20,0,0" VerticalAlignment="Top"/>
+        <Label x:Name = "time" Content="time" Margin="25,112,711,0" VerticalAlignment="Top"/>
+        <Grid x:Name="grid" ShowGridLines="False" Height="400" Width="400">
+
+        </Grid>
     </Grid>
 </Window>
